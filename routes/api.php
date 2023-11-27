@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FraisController;
+use App\Http\Controllers\VisiteurController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // http://localhost:8000/api/
 Route::prefix('frais')->group(function () {
     Route::get('', [FraisController::class, "liste"]);
-    Route::get('{id_visiteur}', [FraisController::class, "fraisVisiteur"]);
+    Route::get('visiteur/{id_visiteur}', [FraisController::class, "fraisVisiteur"]);
     Route::post('ajoutFrais', [FraisController::class, "ajoutFrais"]);
-    Route::put('/updatefrais/{id}', [FraisController::class, 'updateFrais']);
-    Route::delete('/deleteFrais/{id}', [FraisController::class, 'deleteFrais']);
+    Route::put('updateFrais/{id}', [FraisController::class, 'updateFrais']);
+    Route::delete('deleteFrais/{id}', [FraisController::class, 'deleteFrais']);
+    Route::get('mois/{mois}', [FraisController::class, 'fraisMois']);
+});
+
+Route::prefix('visiteur')->group(function () {
+   Route::get('', [VisiteurController::class, "liste"]);
+   Route::get('ville/{ville_visiteur}', [VisiteurController::class, "visiteurVille"]);
+   Route::get('nom/{nom_visiteur}', [VisiteurController::class, "visiteurNom"]);
+   Route::post('ajoutVisiteur', [VisiteurController::class, "ajoutVisiteur"]);
+   Route::delete('deleteVisiteur/{id}', [VisiteurController::class, 'deleteVisiteur']);
+   Route::put('updateVisiteur/{id}', [VisiteurController::class, 'updateVisiteur']);
 });

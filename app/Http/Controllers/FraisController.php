@@ -68,4 +68,9 @@ class FraisController extends Controller
         Frais::destroy($id);
         return response()->json(['status' => "Frais supprimée"]);
     }
+
+    function fraisMois($mois)
+    {
+        return response()->json(Frais::whereRaw("SUBSTRING(anneemois, 6, 2) = ?", [$mois])->select("id_frais", "id_etat", "montantvalide", "anneemois")->get());
+    }
 }
