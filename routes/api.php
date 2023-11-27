@@ -19,10 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('frais')->group(function (){
+// http://localhost:8000/api/
+Route::prefix('frais')->group(function () {
     Route::get('', [FraisController::class, "liste"]);
     Route::get('{id_visiteur}', [FraisController::class, "fraisVisiteur"]);
     Route::post('ajoutFrais', [FraisController::class, "ajoutFrais"]);
-    Route::put('/updateFrais', [FraisController::class, 'updateFrais']);
-
+    Route::put('/updatefrais/{id}', [FraisController::class, 'updateFrais']);
+    Route::delete('/deleteFrais/{id}', [FraisController::class, 'deleteFrais']);
 });

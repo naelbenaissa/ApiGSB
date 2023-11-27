@@ -62,4 +62,10 @@ class FraisController extends Controller
 
         return response()->json(['status' => "Frais modifié", 'data' => $frais]);
     }
+
+    function deleteFrais($id)
+    {
+        Frais::destroy($id);
+        return response()->json(['status' => "Frais supprimée"]);
+    }
 }
