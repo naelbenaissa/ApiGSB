@@ -7,22 +7,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Laboratoire
- * 
+ *
  * @property int $id_laboratoire
  * @property string|null $nom_laboratoire
  * @property string|null $chef_vente
- * 
+ *
  * @property Collection|Visiteur[] $visiteurs
  *
  * @package App\Models
  */
 class Laboratoire extends Model
 {
-	protected $table = 'laboratoire';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'laboratoire';
 	protected $primaryKey = 'id_laboratoire';
 	public $timestamps = false;
 

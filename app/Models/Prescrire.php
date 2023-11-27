@@ -7,15 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Prescrire
- * 
+ *
  * @property int $id_dosage
  * @property int $id_medicament
  * @property int $id_type_individu
  * @property string|null $posologie
- * 
+ *
  * @property Dosage $dosage
  * @property Medicament $medicament
  * @property TypeIndividu $type_individu
@@ -24,7 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Prescrire extends Model
 {
-	protected $table = 'prescrire';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'prescrire';
 	public $incrementing = false;
 	public $timestamps = false;
 

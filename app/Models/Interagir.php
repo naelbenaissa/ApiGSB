@@ -6,21 +6,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Interagir
- * 
+ *
  * @property int $id_medicament
  * @property int $med_id_medicament
- * 
+ *
  * @property Medicament $medicament
  *
  * @package App\Models
  */
 class Interagir extends Model
 {
-	protected $table = 'interagir';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'interagir';
 	public $incrementing = false;
 	public $timestamps = false;
 

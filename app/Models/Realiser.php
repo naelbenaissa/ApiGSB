@@ -7,14 +7,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Realiser
- * 
+ *
  * @property int $id_activite_compl
  * @property int $id_visiteur
  * @property float|null $montant_ac
- * 
+ *
  * @property ActiviteCompl $activite_compl
  * @property Visiteur $visiteur
  *
@@ -22,7 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Realiser extends Model
 {
-	protected $table = 'realiser';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'realiser';
 	public $incrementing = false;
 	public $timestamps = false;
 

@@ -7,15 +7,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Posseder
- * 
+ *
  * @property int $id_praticien
  * @property int $id_specialite
  * @property string|null $diplome
  * @property float|null $coef_prescription
- * 
+ *
  * @property Praticien $praticien
  * @property Specialite $specialite
  *
@@ -23,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Posseder extends Model
 {
-	protected $table = 'posseder';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'posseder';
 	public $incrementing = false;
 	public $timestamps = false;
 

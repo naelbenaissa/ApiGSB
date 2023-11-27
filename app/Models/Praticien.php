@@ -8,10 +8,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Praticien
- * 
+ *
  * @property int $id_praticien
  * @property int|null $id_type_praticien
  * @property string|null $nom_praticien
@@ -20,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $cp_praticien
  * @property string|null $ville_praticien
  * @property float|null $coef_notoriete
- * 
+ *
  * @property TypePraticien|null $type_praticien
  * @property Collection|Inviter[] $inviters
  * @property Collection|Posseder[] $posseders
@@ -31,7 +33,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Praticien extends Model
 {
-	protected $table = 'praticien';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'praticien';
 	protected $primaryKey = 'id_praticien';
 	public $timestamps = false;
 

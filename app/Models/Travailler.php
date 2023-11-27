@@ -8,15 +8,17 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Travailler
- * 
+ *
  * @property int $id_visiteur
  * @property Carbon $jjmmaa
  * @property int $id_region
  * @property string|null $role_visiteur
- * 
+ *
  * @property Region $region
  * @property Visiteur $visiteur
  *
@@ -24,7 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Travailler extends Model
 {
-	protected $table = 'travailler';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'travailler';
 	public $incrementing = false;
 	public $timestamps = false;
 

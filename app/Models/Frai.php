@@ -8,11 +8,14 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Frai
- * 
+ *
  * @property int $id_frais
  * @property int $id_etat
  * @property string $anneemois
@@ -20,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $nbjustificatifs
  * @property Carbon|null $datemodification
  * @property float|null $montantvalide
- * 
+ *
  * @property Etat $etat
  * @property Visiteur $visiteur
  * @property Collection|Fraishorsforfait[] $fraishorsforfaits
@@ -30,7 +33,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Frai extends Model
 {
-	protected $table = 'frais';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'frais';
 	protected $primaryKey = 'id_frais';
 	public $timestamps = false;
 

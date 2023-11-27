@@ -7,14 +7,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class LigneFraisforfait
- * 
+ *
  * @property int $id_frais
  * @property int $id_fraisforfait
  * @property int|null $quantite_ligne
- * 
+ *
  * @property Frai $frai
  * @property Fraisforfait $fraisforfait
  *
@@ -22,7 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LigneFraisforfait extends Model
 {
-	protected $table = 'ligne_fraisforfait';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'ligne_fraisforfait';
 	public $incrementing = false;
 	public $timestamps = false;
 

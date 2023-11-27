@@ -6,15 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Constituer
- * 
+ *
  * @property int $id_composant
  * @property int $id_medicament
  * @property float|null $qte_composant
- * 
+ *
  * @property Composant $composant
  * @property Medicament $medicament
  *
@@ -22,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Constituer extends Model
 {
-	protected $table = 'constituer';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'constituer';
 	public $incrementing = false;
 	public $timestamps = false;
 

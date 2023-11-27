@@ -8,17 +8,20 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class ActiviteCompl
- * 
+ *
  * @property int $id_activite_compl
  * @property Carbon|null $date_activite
  * @property string|null $lieu_activite
  * @property string|null $theme_activite
  * @property string|null $motif_activite
- * 
+ *
  * @property Collection|Inviter[] $inviters
  * @property Collection|Realiser[] $realisers
  *
@@ -26,7 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ActiviteCompl extends Model
 {
-	protected $table = 'activite_compl';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'activite_compl';
 	protected $primaryKey = 'id_activite_compl';
 	public $timestamps = false;
 

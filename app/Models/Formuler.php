@@ -6,15 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Formuler
- * 
+ *
  * @property int $id_medicament
  * @property int $id_presentation
  * @property int|null $qte_formuler
- * 
+ *
  * @property Medicament $medicament
  * @property Presentation $presentation
  *
@@ -22,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Formuler extends Model
 {
-	protected $table = 'formuler';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'formuler';
 	public $incrementing = false;
 	public $timestamps = false;
 

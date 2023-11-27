@@ -9,17 +9,19 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class RapportVisite
- * 
+ *
  * @property int $id_rapport
  * @property int|null $id_praticien
  * @property int $id_visiteur
  * @property Carbon|null $date_rapport
  * @property string|null $bilan
  * @property string|null $motif
- * 
+ *
  * @property Praticien|null $praticien
  * @property Visiteur $visiteur
  * @property Collection|Offrir[] $offrirs
@@ -28,7 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class RapportVisite extends Model
 {
-	protected $table = 'rapport_visite';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'rapport_visite';
 	protected $primaryKey = 'id_rapport';
 	public $timestamps = false;
 

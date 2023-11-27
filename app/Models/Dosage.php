@@ -7,22 +7,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Dosage
- * 
+ *
  * @property int $id_dosage
  * @property int|null $qte_dosage
  * @property string|null $unite_dosage
- * 
+ *
  * @property Collection|Prescrire[] $prescrires
  *
  * @package App\Models
  */
 class Dosage extends Model
 {
-	protected $table = 'dosage';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'dosage';
 	protected $primaryKey = 'id_dosage';
 	public $timestamps = false;
 

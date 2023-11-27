@@ -7,24 +7,29 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Fraishorsforfait
- * 
+ *
  * @property int $id_fraishorsforfait
  * @property int $id_frais
  * @property Carbon|null $date_fraishorsforfait
  * @property float|null $montant_fraishorsforfait
  * @property string|null $lib_fraishorsforfait
- * 
+ *
  * @property Frai $frai
  *
  * @package App\Models
  */
 class Fraishorsforfait extends Model
 {
-	protected $table = 'fraishorsforfait';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'fraishorsforfait';
 	protected $primaryKey = 'id_fraishorsforfait';
 	public $timestamps = false;
 

@@ -8,10 +8,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Medicament
- * 
+ *
  * @property int $id_medicament
  * @property int|null $id_famille
  * @property string|null $depot_legal
@@ -19,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $effets
  * @property string|null $contre_indication
  * @property float|null $prix_echantillon
- * 
+ *
  * @property Famille|null $famille
  * @property Collection|Constituer[] $constituers
  * @property Collection|Formuler[] $formulers
@@ -32,7 +34,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Medicament extends Model
 {
-	protected $table = 'medicament';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'medicament';
 	protected $primaryKey = 'id_medicament';
 	public $timestamps = false;
 

@@ -7,14 +7,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Offrir
- * 
+ *
  * @property int $id_medicament
  * @property int $id_rapport
  * @property int|null $qte_offerte
- * 
+ *
  * @property Medicament $medicament
  * @property RapportVisite $rapport_visite
  *
@@ -22,7 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Offrir extends Model
 {
-	protected $table = 'offrir';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'offrir';
 	public $incrementing = false;
 	public $timestamps = false;
 

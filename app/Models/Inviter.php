@@ -6,15 +6,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class Inviter
- * 
+ *
  * @property int $id_activite_compl
  * @property int $id_praticien
  * @property string $specialiste
- * 
+ *
  * @property ActiviteCompl $activite_compl
  * @property Praticien $praticien
  *
@@ -22,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Inviter extends Model
 {
-	protected $table = 'inviter';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'inviter';
 	public $incrementing = false;
 	public $timestamps = false;
 

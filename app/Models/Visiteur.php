@@ -9,10 +9,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Visiteur
- * 
+ *
  * @property int $id_visiteur
  * @property int|null $id_laboratoire
  * @property int|null $id_secteur
@@ -25,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $login_visiteur
  * @property string|null $pwd_visiteur
  * @property string|null $type_visiteur
- * 
+ *
  * @property Laboratoire|null $laboratoire
  * @property Secteur|null $secteur
  * @property Collection|Frai[] $frais
@@ -37,7 +39,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Visiteur extends Model
 {
-	protected $table = 'visiteur';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'visiteur';
 	protected $primaryKey = 'id_visiteur';
 	public $timestamps = false;
 

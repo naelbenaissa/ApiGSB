@@ -8,14 +8,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 /**
  * Class Region
- * 
+ *
  * @property int $id_region
  * @property int|null $id_secteur
  * @property string|null $nom_region
- * 
+ *
  * @property Secteur|null $secteur
  * @property Collection|Travailler[] $travaillers
  *
@@ -23,7 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Region extends Model
 {
-	protected $table = 'region';
+    use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'region';
 	protected $primaryKey = 'id_region';
 	public $timestamps = false;
 
