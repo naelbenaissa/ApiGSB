@@ -40,4 +40,26 @@ class FraisController extends Controller
 
         return response()->json(['status' => "Frais ajouté", 'data' => $frais]);
     }
+
+    function updateFrais(Request $request)
+    {
+        $idFrais = $request->id;
+
+        $frais = Frais::find($idFrais);
+
+        if (!$frais) {
+            return response()->json(['status' => "Frais non trouvé", 'data' => null]);
+        }
+
+        $frais->id_etat = $request->id_etat;
+        $frais->anneemois = $request->anneemois;
+        $frais->id_visiteur = $request->id_visiteur;
+        $frais->nbjustificatifs = $request->nbjustificatifs;
+        $frais->datemodification = $request->datemodification;
+        $frais->montantvalide = $request->montantvalide;
+
+        $frais->save();
+
+        return response()->json(['status' => "Frais modifié", 'data' => $frais]);
+    }
 }

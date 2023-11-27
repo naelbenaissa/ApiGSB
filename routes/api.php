@@ -23,4 +23,6 @@ Route::prefix('frais')->group(function (){
     Route::get('', [FraisController::class, "liste"]);
     Route::get('{id_visiteur}', [FraisController::class, "fraisVisiteur"]);
     Route::post('ajoutFrais', [FraisController::class, "ajoutFrais"]);
+    Route::put('/updateFrais', [FraisController::class, 'updateFrais']);
+
 });
