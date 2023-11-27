@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Frais;
 use App\Models\Visiteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FraisController extends Controller
 {
@@ -72,5 +73,24 @@ class FraisController extends Controller
     function fraisMois($mois)
     {
         return response()->json(Frais::whereRaw("SUBSTRING(anneemois, 6, 2) = ?", [$mois])->select("id_frais", "id_etat", "montantvalide", "anneemois")->get());
+    }
+
+    function fraisMoisMontant($mois)
+    {
+        $sommeFrais = Frais::whereRaw("SUBSTRING(anneemois, 6, 2) = ?", [$mois])->sum('montantvalide');
+
+        return response()->json(['Mois' => $mois, 'Somme des Frais' => $sommeFrais]);
+    }
+
+    function visiteurSansFrais()
+    {
+        return response()->json(Visiteur::whereDoesntHave('frais')->select('id_visiteur', 'nom_visiteur')->get());
+    }
+
+    function nombreFraisHF()
+    {
+        $nombreFraisHF  = DB::table('fraishorsforfait')->count();
+
+        return response()->json(['Nombre de Frais Hors Forfait' => $nombreFraisHF ]);
     }
 }

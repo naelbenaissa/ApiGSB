@@ -28,6 +28,9 @@ Route::prefix('frais')->group(function () {
     Route::put('updateFrais/{id}', [FraisController::class, 'updateFrais']);
     Route::delete('deleteFrais/{id}', [FraisController::class, 'deleteFrais']);
     Route::get('mois/{mois}', [FraisController::class, 'fraisMois']);
+    Route::get('moisMontant/{mois}', [FraisController::class, 'fraisMoisMontant']);
+    Route::get('visiteurSansFrais', [FraisController::class, 'visiteurSansFrais']);
+    Route::get('nombreFraisHF', [FraisController::class, 'nombreFraisHF']);
 });
 
 Route::prefix('visiteur')->group(function () {
