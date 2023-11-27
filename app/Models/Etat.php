@@ -18,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $id_etat
  * @property string|null $lib_etat
  *
- * @property Collection|Frai[] $frais
+ * @property Collection|Frais[] $frais
  *
  * @package App\Models
  */
@@ -36,6 +36,6 @@ class Etat extends Model
 
 	public function frais()
 	{
-		return $this->hasMany(Frai::class, 'id_etat');
+		return $this->hasMany(Frais::class, 'id_etat');
 	}
 }

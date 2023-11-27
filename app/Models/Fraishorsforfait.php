@@ -21,7 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property float|null $montant_fraishorsforfait
  * @property string|null $lib_fraishorsforfait
  *
- * @property Frai $frai
+ * @property Frais $frai
  *
  * @package App\Models
  */
@@ -48,6 +48,6 @@ class Fraishorsforfait extends Model
 
 	public function frai()
 	{
-		return $this->belongsTo(Frai::class, 'id_frais');
+		return $this->belongsTo(Frais::class, 'id_frais');
 	}
 }

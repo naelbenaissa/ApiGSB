@@ -30,7 +30,7 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @property Laboratoire|null $laboratoire
  * @property Secteur|null $secteur
- * @property Collection|Frai[] $frais
+ * @property Collection|Frais[] $frais
  * @property Collection|RapportVisite[] $rapport_visites
  * @property Collection|Realiser[] $realisers
  * @property Collection|Travailler[] $travaillers
@@ -77,7 +77,7 @@ class Visiteur extends Model
 
 	public function frais()
 	{
-		return $this->hasMany(Frai::class, 'id_visiteur');
+		return $this->hasMany(Frais::class, 'id_visiteur');
 	}
 
 	public function rapport_visites()

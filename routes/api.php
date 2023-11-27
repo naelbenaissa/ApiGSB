@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FraisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('frais')->group(function (){
+    Route::get('', [FraisController::class, "liste"]);
+    Route::get('{id_visiteur}', [FraisController::class, "fraisVisiteur"]);
+    Route::post('ajoutFrais', [FraisController::class, "ajoutFrais"]);
 });

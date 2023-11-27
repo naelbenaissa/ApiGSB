@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * Class Frai
+ * Class Frais
  *
  * @property int $id_frais
  * @property int $id_etat
@@ -31,7 +31,7 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @package App\Models
  */
-class Frai extends Model
+class Frais extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 

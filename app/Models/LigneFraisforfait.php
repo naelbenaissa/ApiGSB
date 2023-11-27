@@ -17,7 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $id_fraisforfait
  * @property int|null $quantite_ligne
  *
- * @property Frai $frai
+ * @property Frais $frai
  * @property Fraisforfait $fraisforfait
  *
  * @package App\Models
@@ -42,7 +42,7 @@ class LigneFraisforfait extends Model
 
 	public function frai()
 	{
-		return $this->belongsTo(Frai::class, 'id_frais');
+		return $this->belongsTo(Frais::class, 'id_frais');
 	}
 
 	public function fraisforfait()
