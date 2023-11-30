@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Frais;
+use App\Models\User;
 use App\Models\Visiteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class VisiteurController extends Controller
 {
@@ -106,5 +109,53 @@ class VisiteurController extends Controller
         } else {
             return response()->json(['status' => "Paramètres manquants", 'data' => null], 400);
         }
+    }
+
+    public function updatePassword()
+    {
+        try {
+            $visiteurs = Visiteur::all();
+
+            foreach ($visiteurs as $visiteur) {
+                $visiteur->pwd_visiteur = Hash::make($visiteur->pwd_visiteur);
+                $visiteur->save();
+            }
+
+            return response()->json(['status' => "Mots de passe mis à jour avec succès", 'data' => $visiteurs]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => "Erreur lors de la mise à jour des mots de passe", 'data' => null], 500);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        if ($request->isJson()) {
+            $data = $request->json()->all();
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $credentials = ['email' => $data['email'], 'password' => $data['password']];
+        }
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['error' => 'The provided credentials are incorrect.'], 401);
+        }
+        $user = User::where('email', $data['email'])->first();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $user->remember_token = $token;
+        $user->save();
+        $visiteur = Visiteur::find($user->id);;
+        return response()->json([
+            'visiteur' => [
+                'id_visiteur' => $visiteur->id_visiteur,
+                'nom_visiteur' => $visiteur->nom_visiteur,
+                'prenom_visiteur' => $visiteur->prenom_visiteur,
+                'type_visiteur' => $visiteur->type_visiteur,
+            ],
+            'access_token' => $token,
+            'token_type' => 'bearer',
+        ]);
+        return response()->json(['error' => 'Request must be JSON.'], 415);
     }
 }

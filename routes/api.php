@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FraisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VisiteurController;
@@ -45,3 +46,5 @@ Route::prefix('visiteur')->group(function () {
 
 //auth
 Route::post('getConnexion', [VisiteurController::class, "getConnexion"]);
+Route::get('updatePassword', [VisiteurController::class,"updatePassword"]);
+Route::post('login', [VisiteurController::class, "login"]);
