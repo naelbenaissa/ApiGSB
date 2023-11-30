@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FraisController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VisiteurController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,6 @@ Route::prefix('visiteur')->group(function () {
    Route::delete('deleteVisiteur/{id}', [VisiteurController::class, 'deleteVisiteur']);
    Route::put('updateVisiteur/{id}', [VisiteurController::class, 'updateVisiteur']);
 });
+
+//auth
+Route::post('getConnexion', [VisiteurController::class, "getConnexion"]);

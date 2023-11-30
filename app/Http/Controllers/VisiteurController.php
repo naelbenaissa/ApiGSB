@@ -88,4 +88,23 @@ class VisiteurController extends Controller
         Visiteur::destroy($id);
         return response()->json(['status' => "Visiteur supprimée"]);
     }
+
+    public function getConnexion(Request $request) {
+        if ($request->login_visiteur != null) {
+            $login_visiteur = $request->login_visiteur;
+            $pwd_visiteur = $request->pwd_visiteur;
+
+            $visiteur = Visiteur::where('login_visiteur', $login_visiteur)
+                ->where('pwd_visiteur', $pwd_visiteur)
+                ->first();
+
+            if ($visiteur) {
+                return response()->json(['status' => "Visiteur identifié", 'data' => $visiteur]);
+            } else {
+                return response()->json(['status' => "Authentification incorrects", 'data' => null], 401);
+            }
+        } else {
+            return response()->json(['status' => "Paramètres manquants", 'data' => null], 400);
+        }
+    }
 }
