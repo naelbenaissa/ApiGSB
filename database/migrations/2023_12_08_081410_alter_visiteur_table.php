@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('visiteur', function (Blueprint $table) {
             $table->rememberToken();
-            $table->timestamp();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
         Schema::table('visiteur', function (Blueprint $table) {
             $table->dropColumn('remember_token');
             $table->dropColumn('created_at');
-            $table->dropColumn('updates_at');
+            $table->dropColumn('updated_at');
         });
     }
 };
