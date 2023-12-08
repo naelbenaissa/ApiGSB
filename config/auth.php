@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'authvisiteur',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'authvisiteur',
         ],
     ],
 
@@ -64,6 +64,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'authvisiteur' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AuthVisiteur::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -97,6 +101,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'authvisiteur' => [
+            'provider' => 'authvisiteur',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ]
     ],
 
     /*

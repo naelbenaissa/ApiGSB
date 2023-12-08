@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuthVisiteur;
 use App\Models\Frais;
 use App\Models\User;
 use App\Models\Visiteur;
@@ -92,12 +93,13 @@ class VisiteurController extends Controller
         return response()->json(['status' => "Visiteur supprimée"]);
     }
 
-    public function getConnexion(Request $request) {
+    public function getConnexion(Request $request)
+    {
         if ($request->login_visiteur != null) {
             $login_visiteur = $request->login_visiteur;
             $pwd_visiteur = $request->pwd_visiteur;
 
-            $visiteur = Visiteur::where('login_visiteur', $login_visiteur)
+            $visiteur = Visiteur/*AuthVisiteur*/ ::where('login_visiteur', $login_visiteur)
                 ->where('pwd_visiteur', $pwd_visiteur)
                 ->first();
 
@@ -129,33 +131,44 @@ class VisiteurController extends Controller
 
     public function login(Request $request)
     {
+        // Vérifiez si la requête est en JSON
         if ($request->isJson()) {
             $data = $request->json()->all();
+            // Validation des données reçues, il faut un login et un password
             $request->validate([
-                'email' => 'required|email',
+                'login' => 'required',
                 'password' => 'required',
             ]);
-            $credentials = ['email' => $data['email'], 'password' => $data['password']];
-        }
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['error' => 'The provided credentials are incorrect.'], 401);
-        }
-        $user = User::where('email', $data['email'])->first();
+            // Correspondance pour la validation des données
+            $credentials = ['login_visiteur' => $data['login'], 'password' =>
+                $data['password']];
 
-        $token = $user->createToken('auth_token')->plainTextToken;
-        $user->remember_token = $token;
-        $user->save();
-        $visiteur = Visiteur::find($user->id);;
-        return response()->json([
-            'visiteur' => [
-                'id_visiteur' => $visiteur->id_visiteur,
-                'nom_visiteur' => $visiteur->nom_visiteur,
-                'prenom_visiteur' => $visiteur->prenom_visiteur,
-                'type_visiteur' => $visiteur->type_visiteur,
-            ],
-            'access_token' => $token,
-            'token_type' => 'bearer',
-        ]);
+            // Auth valide que l'email et le password existe dans la table users
+            if (!Auth::attempt($credentials)) {
+                return response()->json(['error' => 'The provided credentials are
+                incorrect.'], 401);
+            }
+
+            // on récupère les infos du user
+            $visiteur = $request->user();
+            // Création et sauvegarde du token user
+            $tokenResult2 = $visiteur->createToken('Personal Access Token');
+            $token = $tokenResult2->plainTextToken;
+            $visiteur->remember_token = $token;
+            $visiteur->save();
+            // On retourne un JSON pour Angular
+            return response()->json([
+                'visiteur' => [
+                    'id_visiteur' => $visiteur->id_visiteur,
+                    'nom_visiteur' => $visiteur->nom_visiteur,
+                    'prenom_visiteur' => $visiteur->prenom_visiteur,
+                    'type_visiteur' => $visiteur->type_visiteur,
+                ],
+                'access_token' => $token,
+                'token_type' => 'bearer',
+            ]);
+        }
+        // Gestion des erreurs si la requête n'est pas en JSON
         return response()->json(['error' => 'Request must be JSON.'], 415);
     }
 }
