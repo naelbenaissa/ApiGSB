@@ -171,4 +171,13 @@ class VisiteurController extends Controller
         // Gestion des erreurs si la requête n'est pas en JSON
         return response()->json(['error' => 'Request must be JSON.'], 415);
     }
+
+    public function logout(Request $request){
+        $visiteur = $request->user();
+        $visiteur->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Succesfully logged out'
+        ]);
+    }
 }

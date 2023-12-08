@@ -48,3 +48,4 @@ Route::prefix('visiteur')->group(function () {
 Route::post('getConnexion', [VisiteurController::class, "getConnexion"]);
 Route::get('updatePassword', [VisiteurController::class,"updatePassword"]);
 Route::post('login', [VisiteurController::class, "login"]);
+Route::get('/logout', [VisiteurController::class, "logout"])->middleware('auth:sanctum');
