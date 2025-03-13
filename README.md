@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-# ApiDemo - Laravel API
+# ApiGSB - Laravel API
 
 The "ApiGSB" project was a significant milestone in my learning journey as a web developer. It allowed me to solidify my API development skills by applying fundamental concepts and getting familiar with popular technologies in the web development industry.
 
@@ -16,7 +16,7 @@ As the cornerstone of my project, the ApiGSB API not only helped me put into pra
 
 1. **Clone the project:**
    ```bash
-   git clone https://github.com/nbena69/ApiDemo.git
+   git clone https://github.com/naelbenaissa/ApiGSB.git
    ```
 
 2. **Install dependencies:**
